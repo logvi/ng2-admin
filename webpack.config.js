@@ -12,7 +12,7 @@ let config = {
   devtool: 'chip-inline-module-source-map',
 
   entry: {
-    app: './app/app.ts',
+    app: './app/app.module.ts',
     vendor: './app/vendor.ts',
     style: './style/sass/main.scss'
   },
