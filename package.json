@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "go": "./node_modules/.bin/webpack-dev-server --display-reasons --display-chunks",
-    "build": "webpack -d --progress --watch",
+    "build": "webpack -d --progress",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "typings install"
   },
