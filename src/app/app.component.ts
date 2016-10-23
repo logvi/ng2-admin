@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 
 // components
-import { DataTableComponent } from './webcomponents/datatable/datatable.component';
+import { HeaderComponent } from './header.component';
+import { ContentComponent } from './content.component';
 
 @Component({
     selector: 'app',
     template: `
-        <div>
-          Hello World! s
-          <data-table></data-table>
+        <div class="app">
+          <header></header>
+          <content></content>
         </div>
     `
 })
-export class AppComponent {}
+export class AppComponent { }

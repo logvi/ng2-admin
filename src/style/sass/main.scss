@@ -1,4 +1,55 @@
+// header options
+$header-height: 60px;
+$header-color: #30b5e1;
+
+@import './reset.scss';
+@import './components/hamburger.scss';
+@import './components/menu.scss';
+
+
 body {
   font: 100% Helvetica, sans-serif;
   background-color: #efefef;
+}
+
+html {
+  height: 100%;
+}
+body {
+  height: calc(100% - #{$header-height});
+}
+.app {
+  height: 100%;
+}
+
+.app-header {
+  position: fixed;
+  height: $header-height;
+  background-color: $header-color;
+  top: 0;
+  width: 100%;
+}
+
+.app-header__left {
+  div {
+    display: inline-block;
+  }
+}
+
+.app-content {
+  margin-top: $header-height;
+  display: flex;
+  height: 100%;
+}
+
+page-content {
+  padding: 10px;
+  flex: 1;
+}
+
+.panel {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+  padding: 20px;
 }

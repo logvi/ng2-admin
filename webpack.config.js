@@ -6,20 +6,21 @@ var autoprefixer = require('autoprefixer');
 
 let config = {
   // where all modules
-  context: __dirname + '/src',
+  context: __dirname,
 
   //  source map dev tool
   devtool: 'chip-inline-module-source-map',
 
   entry: {
-    app: './app/app.module.ts',
-    vendor: './app/vendor.ts',
-    style: './style/sass/main.scss'
+    app: './src/app/app.module.ts',
+    vendor: './src/app/vendor.ts',
+    style: './src/style/sass/main.scss'
   },
   devServer: {
       colors: true,
       contentBase: path.resolve(__dirname, "dist"),
-      publicPath: "/"
+      publicPath: "/",
+      port: 8081
   },
   output: {
     filename: 'js/[name].js',
@@ -27,6 +28,10 @@ let config = {
     path: path.resolve(__dirname, 'dist')
   },
   resolve: {
+    root: __dirname,
+    modulesDirectories: [
+        'node_modules', '.'
+    ],
     extensions: ['', '.js', '.ts']
   },
   module: {
