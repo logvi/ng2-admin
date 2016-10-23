@@ -1,0 +1,65 @@
+$button-size: 60px;
+$line-height: 5px;
+$background-color: #28aadc;
+$background-color-vertical: #28aadc;
+
+.hamburger {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: $button-size;
+  height: $button-size;
+  font-size: 0;
+  text-indent: -9999px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+  background-color: $background-color;
+
+  &:focus {
+    outline: none;
+  }
+
+  span {
+    display: block;
+    position: absolute;
+    top: 28px;
+    left: 10px;
+    right: 10px;
+    height: $line-height;
+    background: white;
+    transition: transform 0.3s;
+
+    &:before,
+    &:after {
+      position: absolute;
+      display: block;
+      left: 0;
+      width: 100%;
+      height: $line-height;
+      background-color: #fff;
+      content: "";
+    }
+
+    &:before {
+      top: -10px;
+    }
+
+    &:after {
+      bottom: -10px;
+    }
+  }
+
+  &.vertical {
+    background-color: $background-color-vertical;
+
+    span {
+      transform: rotate(90deg);
+    }
+  }
+}
