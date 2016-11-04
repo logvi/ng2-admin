@@ -8,11 +8,11 @@ import {
   AfterContentInit,
   AfterContentChecked,
   AfterViewInit,
-  AfterViewChecked
+  AfterViewChecked,
+  SimpleChanges
 } from '@angular/core';
 
 // services
-import { LoggerService } from './logger.service';
 
 // interfaces
 import { IColumn } from './interfaces/column.interface';
@@ -35,13 +35,12 @@ interface DataTableOptionsInterface {
 
 @Component ({
   selector: 'data-table',
-  providers: [LoggerService],
   template: `
     <div class="data-table-header">
       <!--<button (click)="setFilter()">Filter</button>
       <button (click)="changeData()">Change</button>-->
     </div>
-    <div class="data-table">
+    <div class="data-table-body">
       <table>
         <thead>
           <tr>
@@ -78,9 +77,7 @@ export class DataTableComponent implements OnInit, OnChanges, DoCheck, AfterCont
   private test = [1,2];
   logs: string[];
 
-  constructor(private logger: LoggerService) {
-    this.logs = logger.logs;
-  }
+  constructor() {}
 
   ngOnInit() {
     this.columns.map((col, index) => {
@@ -95,8 +92,9 @@ export class DataTableComponent implements OnInit, OnChanges, DoCheck, AfterCont
     console.log('ngOnInit');
   }
 
-  ngOnChanges(...args) {
-    console.log('ngOnChanges',args);
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('ngOnChanges',changes['data'].currentValue);
+    if (this.dataSource) this.dataSource.setData(changes['data'].currentValue);
   }
 
   ngDoCheck(...args) {
@@ -124,8 +122,8 @@ export class DataTableComponent implements OnInit, OnChanges, DoCheck, AfterCont
   }
 
   getData() {
-    console.log('getData');
-    let newData = this.dataSource.getData().slice(this.currentPage*3, this.currentPage*3 + 3);
+    let newData = this.dataSource.getData();
+    console.log('getData', newData);
     return newData;
     // return this.test;
   }

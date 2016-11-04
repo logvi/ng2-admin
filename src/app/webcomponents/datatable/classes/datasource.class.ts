@@ -64,6 +64,10 @@ export class DataSource {
     return this.resultData;
   }
 
+  setData(data) {
+    this.resultData = data;
+  }
+
   getTotalLength() {
     return this.data.length;
   }

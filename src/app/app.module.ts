@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { HttpModule } from '@angular/http';
+
 
 // components
 import { AppComponent } from './app.component';
@@ -8,6 +10,7 @@ import { HeaderComponent } from './header.component';
 import { ContentComponent } from './content.component';
 import { MenuComponent } from './menu.component';
 import { PageContentComponent } from './pagecontent.component';
+import { TradingReportComponent, DataService } from './pages/tradingreport.component';
 
 // modules
 import DataTableModule from './webcomponents/datatable';
@@ -18,11 +21,16 @@ import DataTableModule from './webcomponents/datatable';
     HeaderComponent,
     ContentComponent,
     MenuComponent,
-    PageContentComponent
+    PageContentComponent,
+    TradingReportComponent
   ],
   imports: [
     BrowserModule,
-    DataTableModule
+    DataTableModule,
+    HttpModule
+  ],
+  providers: [
+    DataService
   ],
   bootstrap: [ AppComponent ]
 })

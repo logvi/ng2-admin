@@ -30,6 +30,9 @@
     "zone.js": "^0.6.25"
   },
   "devDependencies": {
+    "angular2-template-loader": "^0.4.0",
+    "autoprefixer": "^6.5.1",
+    "awesome-typescript-loader": "^2.2.4",
     "bootstrap-sass": "3.3.5",
     "chunk-manifest-webpack-plugin": "0.0.1",
     "css-loader": "0.15.5",
@@ -41,7 +44,9 @@
     "imports-loader": "0.6.4",
     "live-server": "^1.1.0",
     "node-sass": "^3.10.1",
+    "postcss-loader": "^1.0.0",
     "raw-loader": "0.5.1",
+    "resolve-url-loader": "^1.6.0",
     "sass-loader": "1.0.2",
     "script-loader": "0.6.1",
     "style-loader": "0.12.3",
@@ -52,8 +57,6 @@
     "typescript": "^2.0.3",
     "typings": "^1.4.0",
     "webpack": "1.12.9",
-    "webpack-dev-server": "^1.14.1",
-    "angular2-template-loader": "^0.4.0",
-    "awesome-typescript-loader": "^2.2.4"
+    "webpack-dev-server": "^1.14.1"
   }
 }
