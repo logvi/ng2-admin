@@ -1,16 +1,21 @@
 import { Component } from '@angular/core';
-
-// components
-import { HeaderComponent } from './header.component';
-import { ContentComponent } from './content.component';
+import { NgRedux } from 'ng2-redux';
+import { NgReduxRouter } from 'ng2-redux-router';
+import { IAppState, ISession, rootReducer } from './store';
+import { middleware, enhancers, reimmutify } from './store';
 
 @Component({
     selector: 'app',
     template: `
-        <div class="app">
-          <header></header>
-          <content></content>
-        </div>
+      <router-outlet></router-outlet>
     `
 })
-export class AppComponent { }
+export class AppComponent {
+  constructor(
+    private ngRedux: NgRedux<IAppState>,
+    private ngReduxRouter: NgReduxRouter )
+  {
+    ngRedux.configureStore(rootReducer, {}, middleware, enhancers);
+    ngReduxRouter.initialize();
+  }
+}

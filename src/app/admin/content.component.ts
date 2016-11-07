@@ -3,12 +3,11 @@ import { Component } from '@angular/core';
 import { TradingReportComponent } from './pages/tradingreport.component';
 
 @Component ({
-  selector: 'page-content',
+  selector: 'content',
   template: `
     <div>
-      <trading-report></trading-report>
+      <router-outlet></router-outlet>
     </div>
   `
 })
-export class PageContentComponent {
-}
+export class ContentComponent {}

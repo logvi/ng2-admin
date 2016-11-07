@@ -1,11 +1,13 @@
-$width: 200px;
+$menu-width: 250px;
 
 .app-menu {
-  width: $width;
+  width: $menu-width;
   height: 100%;
   background-color: #2b333e;
 
   ul.nav {
+    text-align: center;
+
     li {
       a {
         padding: 0;
@@ -15,8 +17,10 @@ $width: 200px;
         color: #91a7c6;
         position: relative;
         display: block;
+        text-decoration: none;
 
-        &:hover {
+        &:hover,
+        &.active {
           color: #464c59;
           background-color: #fff;
         }

@@ -1,5 +1,6 @@
 $button-size: 60px;
-$line-height: 5px;
+$line-height: 3px;
+$padding: 20px;
 $background-color: #28aadc;
 $background-color-vertical: #28aadc;
 
@@ -29,8 +30,8 @@ $background-color-vertical: #28aadc;
     display: block;
     position: absolute;
     top: 28px;
-    left: 10px;
-    right: 10px;
+    left: $padding;
+    right: $padding;
     height: $line-height;
     background: white;
     transition: transform 0.3s;
@@ -47,11 +48,11 @@ $background-color-vertical: #28aadc;
     }
 
     &:before {
-      top: -10px;
+      top: -7px;
     }
 
     &:after {
-      bottom: -10px;
+      bottom: -7px;
     }
   }
 

@@ -6,7 +6,11 @@
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "types": ["hammerjs"]
   },
   "compileOnSave": false,
   "buildOnSave": false,

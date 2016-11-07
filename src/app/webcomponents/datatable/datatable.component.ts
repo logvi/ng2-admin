@@ -44,10 +44,10 @@ interface DataTableOptionsInterface {
       <table>
         <thead>
           <tr>
-            <td *ngFor="let column of columns"
+            <th *ngFor="let column of columns"
                 (click)="orderBy(column.data)">
                 {{column.name}}
-            </td>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -89,32 +89,32 @@ export class DataTableComponent implements OnInit, OnChanges, DoCheck, AfterCont
     //   currentPage: this.currentPage,
     //   rowsPerPage: this.rowsPerPage
     // });
-    console.log('ngOnInit');
+    // console.log('ngOnInit');
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('ngOnChanges',changes['data'].currentValue);
+    // console.log('ngOnChanges',changes['data'].currentValue);
     if (this.dataSource) this.dataSource.setData(changes['data'].currentValue);
   }
 
   ngDoCheck(...args) {
-    console.log('ngDoCheck',args);
+    // console.log('ngDoCheck',args);
   }
 
   ngAfterContentInit(...args) {
-    console.log('ngAfterContentInit',args);
+    // console.log('ngAfterContentInit',args);
   }
 
   ngAfterContentChecked(...args) {
-    console.log('ngAfterContentChecked',args);
+    // console.log('ngAfterContentChecked',args);
   }
 
   ngAfterViewInit(...args) {
-    console.log('ngAfterViewInit',args);
+    // console.log('ngAfterViewInit',args);
   }
 
   ngAfterViewChecked(...args) {
-    console.log('ngAfterViewChecked',args);
+    // console.log('ngAfterViewChecked',args);
   }
 
   orderBy(column) {
@@ -123,7 +123,7 @@ export class DataTableComponent implements OnInit, OnChanges, DoCheck, AfterCont
 
   getData() {
     let newData = this.dataSource.getData();
-    console.log('getData', newData);
+    // console.log('getData', newData);
     return newData;
     // return this.test;
   }

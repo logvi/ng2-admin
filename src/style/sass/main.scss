@@ -2,14 +2,33 @@
 $header-height: 60px;
 $header-color: #30b5e1;
 
+// angular material design
+// @import '~@angular/material/core/theming/prebuilt/purple-green.scss';
+@import '~@angular/material/core/theming/all-theme';
+// Include non-theme styles for core.
+@include md-core();
+
+// Define a theme.
+$primary: md-palette($md-blue);
+$accent:  md-palette($md-pink, A200, A100, A400);
+
+$theme: md-light-theme($primary, $accent);
+
+// Include all theme styles for the components.
+@include angular-material-theme($theme);
+md-card {
+  overflow-x: auto;
+}
+
 @import './reset.scss';
 @import './components/hamburger.scss';
 @import './components/menu.scss';
 @import './components/datatable.scss';
+@import './flex.scss';
 
 
 body {
-  font: 100% Helvetica, sans-serif;
+  font: 100% Roboto, "Helvetica Neue", sans-serif;
   background-color: #efefef;
 }
 
@@ -19,38 +38,77 @@ html {
 body {
   height: calc(100% - #{$header-height});
 }
+h3 {
+  font-size: 1.2rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
+h1 {
+  font-size: 2rem;
+}
 .app {
   height: 100%;
 }
 
-.app-header {
-  position: fixed;
-  height: $header-height;
-  background-color: $header-color;
-  top: 0;
-  width: 100%;
+.app-icon-button {
+  box-shadow: none;
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: none;
+  font-weight: normal;
+  height: auto;
+  line-height: inherit;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
 }
 
-.app-header__left {
-  div {
-    display: inline-block;
+.app-toolbar-menu {
+  color: white;
+}
+
+.app-header {
+  // position: fixed;
+  // height: $header-height;
+  // background-color: $header-color;
+  top: 0;
+  width: 100%;
+  @include flex_row__space_between;
+
+  .app-header__left {
+    @include flex_row__space_between;
+    width: $menu-width;
+
+    .company-name {
+      @include flex_row__center;
+      padding: 0 15px;
+      color: white;
+      cursor: default;
+    }
   }
 }
 
 .app-content {
-  margin-top: $header-height;
+  // margin-top: $header-height;
   display: flex;
   height: 100%;
 }
 
-page-content {
+.page-content {
   padding: 10px;
   flex: 1;
+  overflow-x: auto;
 }
 
 .panel {
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
-  padding: 20px;
+  padding-top: 20px;
+  overflow-x: auto;
 }
