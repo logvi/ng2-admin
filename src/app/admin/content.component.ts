@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { TradingReportComponent } from './pages/tradingreport.component';
-
 @Component ({
   selector: 'content',
   template: `

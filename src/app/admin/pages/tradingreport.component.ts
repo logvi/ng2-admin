@@ -12,8 +12,6 @@ import {
 } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { DataTableComponent } from '../../webcomponents/datatable/datatable.component';
-
 @Injectable()
 export class DataService {
   private url = 'http://cbadmin-tmp-front--dev.candlebets.com/api/trades/table';

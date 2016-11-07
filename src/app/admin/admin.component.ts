@@ -3,10 +3,6 @@ import { select } from 'ng2-redux';
 import { ISession } from '../store';
 import { Observable } from 'rxjs/Observable';
 
-// components
-import { HeaderComponent } from './header.component';
-import { ContentComponent } from './content.component';
-
 @Component({
     selector: 'admin',
     template: `

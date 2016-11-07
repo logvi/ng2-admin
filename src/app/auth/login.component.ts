@@ -24,6 +24,14 @@ export class LoginComponent {
 
   message: string;
 
+  get isLoggedIn() {
+    return this.ngRedux.getState().session.isLoggedIn;
+  }
+
+  get redirectUrl() {
+    return  this.ngRedux.getState().session.redirectUrl;
+  }
+
   constructor(
     // public authService: AuthService,
     public router: Router,
@@ -35,15 +43,11 @@ export class LoginComponent {
         if (isLoggedIn) {
           // Get the redirect URL from our auth service
           // If no redirect has been set, use the default
-          let redirect = this.ngRedux.getState().session.redirectUrl;
+          let redirect = this.redirectUrl;
           // Redirect the user
           this.router.navigate([redirect]);
         }
     });
-  }
-
-  get isLoggedIn() {
-    return this.ngRedux.getState().session.isLoggedIn;
   }
 
   setMessage() {
