@@ -20,6 +20,7 @@ import { LoginRoutingModule } from './auth/login-routing.module';
 import { MaterialModule } from '@angular/material';
 import { NgReduxModule, DevToolsExtension, NgRedux } from 'ng2-redux';
 import { NgReduxRouter } from 'ng2-redux-router';
+import { ChartModule } from 'angular2-highcharts';
 
 // providers
 import { SessionActions } from './actions';
@@ -33,22 +34,23 @@ import { SessionActions } from './actions';
     ContentComponent,
     TradingReportComponent,
     DashboardComponent,
-    AdminComponent
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
     DataTableModule,
     HttpModule,
-    MaterialModule,
+    MaterialModule.forRoot(),
     LoginRoutingModule,
     AppRoutingModule,
     NgReduxModule.forRoot(),
+    ChartModule,
   ],
   providers: [
     DataService,
     NgRedux,
     NgReduxRouter,
-    SessionActions
+    SessionActions,
   ],
   bootstrap: [ AppComponent ]
 })

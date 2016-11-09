@@ -22,3 +22,8 @@
   @include flex_row;
   justify-content: space-between;
 }
+
+.flex-center {
+  @include flex;
+  @include flex_row__center;
+}

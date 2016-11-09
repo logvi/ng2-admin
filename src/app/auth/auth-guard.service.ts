@@ -5,7 +5,6 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 } from '@angular/router';
-// import { AuthService } from './auth.service';
 import { SessionActions } from '../actions';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../store';
@@ -13,7 +12,6 @@ import { IAppState } from '../store';
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
-    // private authService: AuthService,
     private router: Router,
     private ngRedux: NgRedux<IAppState>,
     private sessionActions: SessionActions) {}
@@ -35,7 +33,6 @@ export class AuthGuard implements CanActivate {
     if (this.isLoggedIn) { return true; }
 
     // Store the attempted URL for redirecting
-    // this.authService.redirectUrl = url;
     this.sessionActions.setRedirectUrl(url);
 
     // Navigate to the login page with extras

@@ -75,7 +75,7 @@ export class DataService {
   template: `
     <!-- <div class="panel"> -->
     <md-card>
-    <button md-button>Basic Button</button>
+    <button md-raised-button color="accent">Basic Button</button>
 
       <data-table
         [columns]="columns"

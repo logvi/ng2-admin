@@ -1,0 +1,22 @@
+dashboard {
+  display: flex;
+  padding: 10px;
+
+  md-card {
+    margin: 10px;
+    flex-grow: 1;
+  }
+
+  .total-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    md-card-content {
+      .total-value {
+        text-align: center;
+        font-size: 2rem;
+      }
+    }
+  }
+}

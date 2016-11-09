@@ -3,26 +3,29 @@ $menu-width: 250px;
 .app-menu {
   width: $menu-width;
   height: 100%;
-  background-color: #2b333e;
 
   ul.nav {
-    text-align: center;
-
+    font-size: 0.9rem;
     li {
+      md-icon {
+        position: absolute;
+        left: 15px;
+        top: 13px;
+      }
       a {
-        padding: 0;
+        padding: 0 0 0 60px;
         line-height: 50px;
         height: 50px;
         overflow: hidden;
-        color: #91a7c6;
+        color: #4C4C4C;
         position: relative;
         display: block;
         text-decoration: none;
 
         &:hover,
         &.active {
-          color: #464c59;
-          background-color: #fff;
+          color: #262626;
+          background-color: #f7f7f7;
         }
       }
 

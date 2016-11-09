@@ -9,13 +9,19 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   providers: [ SessionActions ],
   template: `
-    <h2>LOGIN</h2>
-    <p>{{message}}</p>
-    <p>
-    {{isLoggedIn$ | async}}
-      <button (click)="login()"  *ngIf="isLoggedOut$ | async">Login</button>
-      <button (click)="logout()" *ngIf="isLoggedIn$ | async">Logout</button>
-    </p>`
+    <div class="login-page flex-center">
+      <md-card>
+        <md-card-title>Login</md-card-title>
+        <md-card-content>
+          <md-input placeholder="Username"></md-input>
+          <md-input placeholder="Password"></md-input>
+        </md-card-content>
+        <md-card-actions>
+          <button md-raised-button color="primary" (click)="login()" >Sign in</button>
+        </md-card-actions>
+      </md-card>
+    </div>
+    `
 })
 
 export class LoginComponent {
@@ -58,7 +64,7 @@ export class LoginComponent {
     this.message = 'Trying to log in ...';
     this.actions.setCredentials({
       profile: {
-        firstName: 'Vasya',
+        firstName: 'Demo',
         lastName: ''
       }
     });

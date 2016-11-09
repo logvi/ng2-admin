@@ -21,22 +21,22 @@ md-card {
 }
 
 @import './reset.scss';
+@import './flex.scss';
 @import './components/hamburger.scss';
 @import './components/menu.scss';
 @import './components/datatable.scss';
-@import './flex.scss';
+@import './components/dashboard.scss';
+@import './components/login.scss';
 
 
 body {
   font: 100% Roboto, "Helvetica Neue", sans-serif;
   background-color: #efefef;
+  height: 100%;
 }
 
 html {
   height: 100%;
-}
-body {
-  height: calc(100% - #{$header-height});
 }
 h3 {
   font-size: 1.2rem;
@@ -48,6 +48,7 @@ h1 {
   font-size: 2rem;
 }
 .app {
+  @include flex_column;
   height: 100%;
 }
 
@@ -89,6 +90,8 @@ h1 {
       padding: 0 15px;
       color: white;
       cursor: default;
+      font-weight: lighter;
+      letter-spacing: 0.1em;
     }
   }
 }
@@ -96,11 +99,15 @@ h1 {
 .app-content {
   // margin-top: $header-height;
   display: flex;
-  height: 100%;
+  flex: 1;
+
+  md-sidenav-layout {
+    width: 100%;
+  }
 }
 
 .page-content {
-  padding: 10px;
+  // padding: 10px;
   flex: 1;
   overflow-x: auto;
 }

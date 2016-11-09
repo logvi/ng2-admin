@@ -28,8 +28,9 @@ import { AuthGuard } from './auth/auth-guard.service';
       {
         path: '',
         component: AdminComponent,
+        canActivate: [AuthGuard],
         children: [
-          { path: '', component: TradingReportComponent}
+          { path: '', component: DashboardComponent}
         ]
       }
     ])
