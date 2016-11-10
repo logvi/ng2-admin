@@ -74,13 +74,14 @@ export class DataService {
   providers: [DataService],
   template: `
     <!-- <div class="panel"> -->
-    <md-card>
-    <button md-raised-button color="accent">Basic Button</button>
-
-      <data-table
-        [columns]="columns"
-        [data]="data">
-      </data-table>
+    Trading Report
+    <md-card class="report">
+      <md-card-content>
+        <data-table
+          [columns]="columns"
+          [data]="data">
+        </data-table>
+      </md-card-content>
     </md-card>
     <!-- </div> -->
   `

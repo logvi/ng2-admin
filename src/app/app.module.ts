@@ -10,8 +10,12 @@ import { AdminComponent } from './admin/admin.component';
 import { HeaderComponent } from './admin/header.component';
 import { ContentComponent } from './admin/content.component';
 import { MenuComponent } from './admin/menu.component';
-import { DashboardComponent } from './admin/pages/dashboard.component';
-import { TradingReportComponent, DataService } from './admin/pages/tradingreport.component';
+import {
+  DashboardComponent,
+  RevenueComponent,
+  RevenueChartComponent,
+} from './admin/pages/dashboard';
+import { TradingReportComponent, DataService } from './admin/pages/tradingreport';
 
 // modules
 import DataTableModule from './webcomponents/datatable';
@@ -35,6 +39,8 @@ import { SessionActions } from './actions';
     TradingReportComponent,
     DashboardComponent,
     AdminComponent,
+    RevenueComponent,
+    RevenueChartComponent,
   ],
   imports: [
     BrowserModule,

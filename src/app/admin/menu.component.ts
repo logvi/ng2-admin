@@ -60,9 +60,9 @@ export class MenuComponent {
         ]
       },
       {
-        title: 'Trading Reports',
+        title: 'Trading Report',
         icon: 'view_list',
-        link: '/admin/tradingreports',
+        link: '/admin/tradingreport',
         children: []
       },
       {

@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule }   from '@angular/router';
 
 import { AdminComponent } from './admin/admin.component';
-import { DashboardComponent } from './admin/pages/dashboard.component';
-import { TradingReportComponent } from './admin/pages/tradingreport.component';
+import {
+  DashboardComponent,
+  TradingReportComponent,
+} from './admin/pages';
 
 import { AuthGuard } from './auth/auth-guard.service';
 
@@ -30,7 +32,7 @@ import { AuthGuard } from './auth/auth-guard.service';
         component: AdminComponent,
         canActivate: [AuthGuard],
         children: [
-          { path: '', component: DashboardComponent}
+          { path: '', component: TradingReportComponent}
         ]
       }
     ])

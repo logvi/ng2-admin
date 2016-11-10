@@ -1,5 +1,6 @@
 dashboard {
   display: flex;
+  flex-direction: column;
   padding: 10px;
 
   md-card {
@@ -12,7 +13,21 @@ dashboard {
     flex-wrap: wrap;
     width: 100%;
 
+    md-card {
+      padding: 10px 14px;
+    }
+
     md-card-content {
+      @include flex_column__center;
+
+      .total-item-title {
+        font-size: 1.2rem;
+      }
+
+      .total-value-growth {
+        font-size: 1rem;
+      }
+
       .total-value {
         text-align: center;
         font-size: 2rem;

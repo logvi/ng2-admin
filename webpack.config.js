@@ -65,7 +65,10 @@ let config = {
       __TEST__: JSON.stringify(process.env.TEST || false),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
-  ]
+  ],
+  alias: {
+    highcharts$: "highcharts/highcharts.src.js"
+  }
 }
 
 module.exports = config;
