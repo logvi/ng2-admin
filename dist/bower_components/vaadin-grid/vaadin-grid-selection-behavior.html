@@ -1,0 +1,210 @@
+<link rel="import" href="../paper-checkbox/paper-checkbox.html">
+
+<script>
+  window.vaadin = window.vaadin || {};
+  vaadin.elements = vaadin.elements || {};
+  vaadin.elements.grid = vaadin.elements.grid || {};
+
+  /**
+   * @polymerBehavior vaadin.elements.grid.SelectionBehavior
+   */
+  vaadin.elements.grid.SelectionBehavior = {
+
+    properties: {
+
+      /**
+       * When `true`, a multi-selection column is automatically added as the first column.
+       */
+      multiSelection: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * This is the currently selected item, or `null`
+       * if no item is selected.
+       */
+      selectedItem: {
+        type: Object,
+        notify: true,
+        computed: '_getSelectedItem(selectedItems.*)'
+      },
+
+      /**
+       * An array that contains the selected items.
+       */
+      selectedItems: {
+        type: Object,
+        notify: true,
+        value: function() {
+          return [];
+        }
+      },
+
+      _frozenColumns: {
+        computed: '_getFrozenColumns(frozenColumns, multiSelection)'
+      },
+
+      _multiSelectColumn: Object
+    },
+
+    observers: [
+      '_multiSelectionChanged(multiSelection, _columnTree)',
+      '_selectedItemsChanged(selectedItems.*)'
+    ],
+
+    listeners: {
+      'template-instance-changed': '_templateInstanceChangedSelection'
+    },
+
+    _multiSelectionChanged: function(multiSelection, columns) {
+      if (multiSelection && !this._multiSelectionColumn) {
+        this._multiSelectionColumn = document.createElement('vaadin-grid-multi-select-column');
+        this._multiSelectionColumn.grid = this;
+        this.listen(this._multiSelectionColumn, 'select-all-changed', '_onSelectAllChanged');
+
+        this._columnTree = columns.map(function(cols) {
+          cols.unshift(this._multiSelectionColumn.$.column);
+          return cols.slice(0);
+        }.bind(this));
+      } else if(!multiSelection && this._multiSelectionColumn) {
+        this.unlisten(this._multiSelectionColumn, 'select-all-changed', '_onSelectAllChanged');
+
+        this._multiSelectionColumn = undefined;
+        this._columnTree = columns.map(function(cols) {
+          cols.shift();
+          return cols.slice(0);
+        }.bind(this));
+      }
+    },
+
+    _templateInstanceChangedSelection: function(e) {
+      if (e.detail.prop === 'selected') {
+        var item = e.detail.inst.item;
+        (this._isSelected(item) ? this.deselectItem : this.selectItem).bind(this)(item);
+
+        // stop this internal event from propagating outside.
+        e.stopPropagation();
+      }
+    },
+
+    _isSelected: function(item) {
+      var selected = this.selectedItems && this.selectedItems.indexOf(item) > -1;
+      return (this.selectedItems && this.selectedItems.inverted) ? !selected : selected;
+    },
+
+    _onSelectAllChanged: function(e) {
+      var selectedItems = [];
+      selectedItems.inverted = e.detail.value;
+      this.selectedItems = selectedItems;
+    },
+
+    /**
+     * Selects the given item.
+     *
+     * @method selectItem
+     * @param {Object} item The item object
+     */
+    selectItem: function(item) {
+      if (typeof item === 'number' && item >= 0 && this.items && this.items.length > item) {
+        this._selectItem(this.items[item]);
+      } else {
+        this._selectItem(item);
+      }
+    },
+
+    _selectItem: function(item) {
+      if (this.selectedItems.inverted) {
+        var index;
+        if ((index = this.selectedItems.indexOf(item)) > -1) {
+          this.splice('selectedItems', index, 1);
+        }
+      } else {
+        this.push('selectedItems', item);
+      }
+    },
+
+    /**
+     * Deselects the given item if it is already selected.
+     *
+     * @method deselect
+     * @param {Object} item The item object
+     */
+    deselectItem: function(item) {
+      if (typeof item === 'number' && item >= 0 && this.items && this.items.length > item) {
+        this._deselectItem(this.items[item]);
+      } else {
+        this._deselectItem(item);
+      }
+    },
+
+    _deselectItem: function(item) {
+      var index = this.selectedItems.indexOf(item);
+      if (this.selectedItems.inverted) {
+        if (index === -1) {
+          this.push('selectedItems', item);
+        }
+      } else {
+        if (index > -1) {
+          this.splice('selectedItems', index, 1);
+        }
+      }
+    },
+
+    _selectedItemsChanged: function(e) {
+      if (this.$.scroller._physicalItems && (e.path === 'selectedItems' || e.path === 'selectedItems.splices')) {
+        this.$.scroller._physicalItems.forEach(function(row) {
+          row.selected = this._isSelected(row.item);
+        }.bind(this));
+      }
+    },
+
+    _getFrozenColumns: function () {
+      return this.frozenColumns + (this.multiSelection ? 1 : 0);
+    },
+
+    _getSelectedItem: function() {
+      if (this.selectedItems && this.selectedItems.length > 0) {
+        return this.selectedItems[this.selectedItems.length - 1];
+      } else {
+        return null;
+      }
+    }
+
+  };
+</script>
+
+<dom-module id="vaadin-grid-selection-styles">
+  <template>
+    <style>
+      tbody tr[selected] td {
+        background-color: rgb(243, 243, 243);
+      }
+    </style>
+  </template>
+</dom-module>
+
+<dom-module id="vaadin-grid-multi-select-column">
+  <template>
+    <vaadin-grid-column id="column" width="52px" flex="0" frozen>
+      <template class="header">
+        <paper-checkbox style="padding-left: 8px" checked="{{selectAll}}"></paper-checkbox>
+      </template>
+      <template>
+        <paper-checkbox style="padding-left: 8px" checked="{{selected}}"></paper-checkbox>
+      </template>
+    </vaadin-grid-column>
+  </template>
+  <script>
+    Polymer({
+      is: 'vaadin-grid-multi-select-column',
+
+      properties: {
+        selectAll: {
+          notify: true
+        },
+      }
+
+    });
+  </script>
+</dom-module>

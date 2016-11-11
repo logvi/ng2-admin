@@ -21,16 +21,25 @@ md-card {
 
   &.report {
     padding: 0;
+    overflow: hidden;
+    height: 100%;
+
+    md-card-content {
+      overflow: hidden;
+      height: 100%;
+    }
   }
 }
 
 @import './reset.scss';
+// @import 'angular2-data-table/release/material.css';
 @import './flex.scss';
 @import './components/hamburger.scss';
 @import './components/menu.scss';
 @import './components/datatable.scss';
 @import './components/dashboard.scss';
 @import './components/login.scss';
+@import './components/reportpage.scss';
 
 
 body {
@@ -111,9 +120,18 @@ h1 {
 }
 
 .page-content {
-  // padding: 10px;
   flex: 1;
   overflow-x: auto;
+  height: 100%;
+  display: block;
+
+  .page-header {
+    h3 {
+      text-transform: uppercase;
+      padding: 15px;
+      color: #777;
+    }
+  }
 }
 
 .panel {

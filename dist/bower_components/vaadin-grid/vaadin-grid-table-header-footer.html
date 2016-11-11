@@ -1,0 +1,57 @@
+<script>
+  (function() {
+
+    /**
+     * @polymerBehavior vaadinGridTableRowContainerBehavior
+     */
+    var vaadinGridTableRowContainerBehavior = {
+      properties: {
+        columnTree: Array,
+        _rows: Array
+      },
+
+      observers: ['_columnTreeChanged(columnTree)', '_rowsChanged(_rows)'],
+
+      _columnTreeChanged: function(columnTree) {
+        var rows = [];
+        for(var i=0; i < columnTree.length; i++) {
+          var row = this._createRow();
+          row.target = this.domHost.domHost;
+          row._isColumnRow = i == columnTree.length - 1;
+          row.columns = columnTree[i];
+          rows.push(row);
+        }
+
+        this._rows = this.localName === 'thead' ? rows : rows.reverse();
+      },
+
+      _rowsChanged: function(rows) {
+        Polymer.dom(this).innerHTML = '';
+
+        rows.forEach(function(row) {
+          Polymer.dom(this).appendChild(row);
+        }.bind(this));
+      }
+    };
+
+    Polymer({
+      is: 'vaadin-grid-table-header',
+      extends: 'thead',
+      behaviors: [vaadinGridTableRowContainerBehavior],
+
+      _createRow: function() {
+        return document.createElement('tr', 'vaadin-grid-table-header-row');
+      }
+    });
+
+    Polymer({
+      is: 'vaadin-grid-table-footer',
+      extends: 'tfoot',
+      behaviors: [vaadinGridTableRowContainerBehavior],
+
+      _createRow: function() {
+        return document.createElement('tr', 'vaadin-grid-table-footer-row');
+      }
+    });
+  })();
+</script>

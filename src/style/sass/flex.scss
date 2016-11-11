@@ -33,3 +33,7 @@
   @include flex;
   @include flex_row__center;
 }
+
+.flex-column {
+  @include flex_column;
+}

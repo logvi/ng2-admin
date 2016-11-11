@@ -1,3 +1,3 @@
-import { TradingReportComponent, DataService } from './tradingreport.component';
+import { TradingReportComponent } from './tradingreport.component';
 
-export { TradingReportComponent, DataService };
+export { TradingReportComponent };

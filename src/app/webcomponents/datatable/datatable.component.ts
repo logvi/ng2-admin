@@ -36,17 +36,28 @@ interface DataTableOptionsInterface {
 @Component ({
   selector: 'data-table',
   template: `
-    <div class="data-table-header">
+    <div class="datatable-header">
       <!--<button (click)="setFilter()">Filter</button>
       <button (click)="changeData()">Change</button>-->
     </div>
-    <div class="data-table-body">
+    <div class="datatable-body">
       <table>
         <thead>
           <tr>
             <th *ngFor="let column of columns"
                 (click)="orderBy(column.data)">
+                <div class="fake-column-head">
+                  <input type="text" placeholder="filter">
+                </div>
+                <br>
                 {{column.name}}
+                <div class="column-head">
+                  <div>
+                    <input type="text" placeholder="filter">
+                  </div>
+                  <br>
+                  {{column.name}}
+                </div>
             </th>
           </tr>
         </thead>
@@ -57,7 +68,7 @@ interface DataTableOptionsInterface {
         </tbody>
       </table>
     </div>
-    <div class="data-table-footer">
+    <div class="datatable-footer">
       <!--<pager
         [rowsPerPage]="rowsPerPage"
         [numberRows]="dataSource.getTotalLength()">

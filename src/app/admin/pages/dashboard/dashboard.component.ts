@@ -3,17 +3,22 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'dashboard',
   template: `
-     <div class="total-container">
-      <md-card *ngFor="let item of totalValues">
-        <md-card-content>
-          <div class="total-item-title">{{item.name}}</div>
-          <div class="total-value">{{item.value}}</div>
-          <div class="total-value-growth" *ngIf="item.hasOwnProperty('value_change')">{{item.value_change}}</div>
-        </md-card-content>
-      </md-card>
-    </div>
+    <div class="page-content">
+      <div class="page-header">
+        <h3>Dashboard</h3>
+      </div>
+       <div class="total-container">
+        <md-card *ngFor="let item of totalValues">
+          <md-card-content>
+            <div class="total-item-title">{{item.name}}</div>
+            <div class="total-value">{{item.value}}</div>
+            <div class="total-value-growth" *ngIf="item.hasOwnProperty('value_change')">{{item.value_change}}</div>
+          </md-card-content>
+        </md-card>
+      </div>
 
-    <revenue></revenue>
+      <revenue></revenue>
+    </div>
   `
 })
 export class DashboardComponent {

@@ -1,0 +1,53 @@
+<link rel="import" href="vaadin-grid-table-cell.html">
+
+<dom-module id="vaadin-grid-sizer">
+  <template>
+    <style>
+      :host {
+        display: flex;
+        position: relative;
+        width: 100%;
+        visibility: hidden;
+        transform: translateY(-100%);
+      }
+
+      .cell {
+        display: block;
+        flex-shrink: 0;
+      }
+    </style>
+
+    <template is="dom-repeat" items="[[_columns]]" as="column">
+      <vaadin-grid-sizer-cell class="cell" column="[[column]]">&nbsp;</vaadin-grid-sizer-cell>
+    </template>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'vaadin-grid-sizer',
+
+      extends: 'div',
+
+      properties: {
+        columnTree: Array,
+
+        scrollHeight: Number,
+
+        _columns: Array
+      },
+
+      observers: [
+        '_columnTreeChanged(columnTree)',
+        '_scrollHeightChanged(scrollHeight)'
+      ],
+
+      _columnTreeChanged: function(columnTree) {
+        this._columns = columnTree[columnTree.length - 1];
+      },
+
+      _scrollHeightChanged: function(scrollHeight) {
+        this.style.top = scrollHeight + 'px';
+      }
+    });
+  </script>
+</dom-module>

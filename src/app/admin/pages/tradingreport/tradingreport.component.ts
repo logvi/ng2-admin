@@ -72,18 +72,21 @@ export class DataService {
 @Component ({
   selector: 'trading-report',
   providers: [DataService],
+  host: {'[class.page-content]': 'true'},
   template: `
-    <!-- <div class="panel"> -->
-    Trading Report
-    <md-card class="report">
-      <md-card-content>
-        <data-table
-          [columns]="columns"
-          [data]="data">
-        </data-table>
-      </md-card-content>
-    </md-card>
-    <!-- </div> -->
+    <div class="flex-column report-page">
+      <div class="page-header">
+        <h3>Trading Report</h3>
+      </div>
+      <md-card class="report">
+        <md-card-content>
+          <data-table
+            [columns]="columns"
+            [data]="data">
+          </data-table>
+        </md-card-content>
+      </md-card>
+    </div>
   `
 })
 export class TradingReportComponent implements OnInit {

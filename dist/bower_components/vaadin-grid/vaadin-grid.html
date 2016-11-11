@@ -1,0 +1,125 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="vaadin-grid-table.html">
+<link rel="import" href="vaadin-grid-column.html">
+<link rel="import" href="vaadin-grid-row-details-behavior.html">
+<link rel="import" href="vaadin-grid-data-source-behavior.html">
+<link rel="import" href="vaadin-grid-array-data-source-behavior.html">
+<link rel="import" href="vaadin-grid-selection-behavior.html">
+<link rel="import" href="vaadin-grid-sort-behavior.html">
+<link rel="import" href="vaadin-grid-filter-behavior.html">
+
+<dom-module id="vaadin-grid">
+  <style>
+    :host {
+      display: block;
+      height: 400px;
+      /* default height to avoid accidental usage without explicit height */
+      --vaadin-grid-border-color: rgba(0, 0, 0, 0.08);
+
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #scroller {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+  <template>
+    <vaadin-grid-table id="scroller" loading$=[[loading]] bind-data="[[_bindData]]" size="[[size]]"
+        column-tree="[[_columnTree]]" frozen-columns=[[_frozenColumns]] content-target=[[_getContentTarget()]]
+        row-details-template=[[rowDetailsTemplate]]>
+      <content></content>
+    </vaadin-grid-table>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'vaadin-grid',
+
+    properties: {
+
+      _columnTree: {
+        type: Array,
+        notify: true
+      },
+
+      size: Number,
+
+      rowDetailsTemplate: Object,
+
+      _bindData: {
+        value: function() {
+          return this._getItem.bind(this);
+        }
+      }
+    },
+
+    behaviors: [
+      vaadin.elements.grid.RowDetailsBehavior,
+      vaadin.elements.grid.DataSourceBehavior,
+      vaadin.elements.grid.ArrayDataSourceBehavior,
+      vaadin.elements.grid.SelectionBehavior,
+      vaadin.elements.grid.SortBehavior,
+      vaadin.elements.grid.FilterBehavior
+    ],
+
+    observers: ['_columnTreeChanged(_columnTree.*)'],
+
+    _updateItem: function(row, item) {
+      row.style.minHeight = item ? '' : this.$.scroller._physicalAverage + 'px';
+      row.item = item;
+      row.selected = this._isSelected(item);
+      row.expanded = this._isExpanded(item);
+    },
+
+    _getContentTarget: function() {
+      return this;
+    },
+
+    ready: function() {
+      var rootColumns = Polymer.dom(this).children.filter(function(el) {
+        return el.localName.indexOf('vaadin-grid-column') === 0;
+      });
+
+      var _columnTree = [];
+      for(var c = rootColumns;;) {
+        _columnTree.push(c);
+        if (this._isLastRow(c)) {
+          break;
+        }
+        c = this._childrenColumns(c);
+      }
+
+      this._columnTree = _columnTree;
+
+      this.rowDetailsTemplate = Polymer.dom(this).querySelector('template.row-details') || undefined;
+    },
+
+    _isLastRow: function(columns) {
+      return columns.reduce(function(prev, col) {
+         return prev && /vaadin-grid-column$/.test(col.localName);
+      }, true);
+    },
+
+    _childrenColumns: function(columns) {
+      return columns.map(function(col) {
+        var children = Polymer.dom(col).children.filter(function(el) {
+          return /vaadin-grid-column/.test(el.localName);
+        });
+        return children.length > 0 ? children : [col];
+      }.bind(this)).reduce(function(prev, curr) {
+        return prev.concat(curr);
+      }, []);
+    },
+
+    _columnTreeChanged: function(e) {
+      if (e.path === '_columnTree.splices' || //array is spliced
+        (e.path.indexOf('_columnTree.#') === 0 && e.path.split('.').length === 2)) { //column is replaced using `set()`
+        // TODO: implement splice support that will add and remove only affected cells.
+        // meanwhile, deal with splices as the whole array would change.
+        this._columnTree = this._columnTree.slice(0);
+      }
+    }
+  });
+</script>

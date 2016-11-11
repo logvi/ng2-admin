@@ -1,0 +1,21 @@
+{
+  "name": "ng2-admin",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "vitalijlogvinenko <mirenrich@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/logvi/ng2-admin",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vaadin-grid": "2.0.0-pre.2",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^1.4.1"
+  }
+}

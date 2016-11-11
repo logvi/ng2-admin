@@ -1,5 +1,21 @@
+// my data table
 data-table {
   position: relative;
+  display: block;
+  padding-top: 60px;
+  overflow-x: auto;
+  height: calc(100% - 60px);
+
+  .datatable-body {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: inline-block;
+
+    &:before {
+      content: '';
+    }
+  }
 
   table {
     width: 100%;
@@ -20,12 +36,37 @@ data-table {
 
       th {
         padding: 0 24px 0 24px;
+        height: 0;
+        line-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        color: transparent;
+        border: none;
+        white-space: nowrap;
+
+        .fake-column-head {
+          visibility: hidden;
+          height: 0;
+        }
+
+        .column-head {
+          position: absolute;
+          background: transparent;
+          color: black;
+          top: 0;
+          line-height: normal;
+        }
       }
     }
 
     tr {
-      height: 40px;
       text-align: center;
+    }
+
+    tbody {
+      tr {
+        height: 40px;
+      }
     }
 
     td {
